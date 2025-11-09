@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Reset suave e tipografia */
+:root {
+  --bg: #ffffff;
+  --fg: #0a0a0a;
+  --muted: #6b7280; /* neutral-500 */
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+  color: var(--fg);
+  font-feature-settings: "liga" 1, "kern" 1;
+  text-rendering: optimizeLegibility;
+}
+
+/* Scrollbar discreta */
+*::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: #f3f4f6; /* neutral-100 */
+}
+*::-webkit-scrollbar-thumb {
+  background-color: #d1d5db; /* neutral-300 */
+  border-radius: 20px;
+  border: 2px solid #f3f4f6;
+}
+
+a {
+  color: #1d4ed8; /* blue-700 */
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* Containers padrões */
+.container {
+  @apply mx-auto max-w-7xl px-4;
+}
+
+/* Sombras suaves para cards */
+.shadow-soft {
+  box-shadow:
+    0 1px 2px rgba(0,0,0,0.04),
+    0 8px 24px rgba(0,0,0,0.06);
+}
+
+/* Animações utilitárias */
+.fade-in {
+  animation: fade-in 280ms ease-out 1;
+}
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px) }
+  to   { opacity: 1; transform: translateY(0) }
+}
+
+/* Estados de formulário */
+input::placeholder {
+  color: #9ca3af; /* neutral-400 */
+}
+
+/* Helpers para badges, chips etc. */
+.badge {
+  @apply rounded-full bg-neutral-100 px-2 py-0.5 text-xs text-neutral-700;
+}
