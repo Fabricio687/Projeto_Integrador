@@ -6,10 +6,13 @@ const isLocalhost = window.location.hostname === 'localhost' ||
                     window.location.hostname === '127.0.0.1' ||
                     window.location.hostname === '';
 
+// URL do backend em produção (fallback)
+const PRODUCTION_API_URL = 'https://portal-aluno-backend-two.vercel.app/api';
+
 // Prioridade:
 // 1. Variável de ambiente VITE_API_URL (definida no .env ou Vercel)
 // 2. Se estiver em localhost, usar backend local
-// 3. Fallback para URL padrão do backend no Vercel
+// 3. Fallback para URL do backend em produção
 
 let API_BASE_URL;
 
@@ -20,22 +23,13 @@ if (import.meta.env.VITE_API_URL) {
   // Em desenvolvimento local, usar backend local
   API_BASE_URL = 'http://localhost:3100/api';
 } else {
-  // Em produção no Vercel, se VITE_API_URL não estiver definida
-  console.error('❌ ERRO CRÍTICO: Variável de ambiente VITE_API_URL não configurada!');
-  console.error('💡 SOLUÇÃO: Configure a variável VITE_API_URL no Vercel');
-  console.error('💡 1. Vá em Settings > Environment Variables');
-  console.error('💡 2. Adicione: Key: VITE_API_URL, Value: https://seu-backend.vercel.app/api');
-  console.error('💡 3. Faça um redeploy do frontend');
-  // Usar URL que causará erro claro - melhor do que usar URL errada
-  API_BASE_URL = 'https://CONFIGURE-VITE-API-URL.vercel.app/api';
+  // Em produção no Vercel, usar URL do backend
+  API_BASE_URL = PRODUCTION_API_URL;
 }
 
-// Log apenas em desenvolvimento
-if (!import.meta.env.PROD) {
+// Log da URL sendo usada (apenas se não for localhost)
+if (!isLocalhost) {
   console.log('🔗 API Base URL:', API_BASE_URL);
-  console.log('🔍 Mode:', import.meta.env.MODE);
-  console.log('🔍 PROD:', import.meta.env.PROD);
-  console.log('🔍 isLocalhost:', isLocalhost);
 }
 
 export const api = axios.create({
