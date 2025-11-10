@@ -20,10 +20,14 @@ if (import.meta.env.VITE_API_URL) {
   // Em desenvolvimento local, usar backend local
   API_BASE_URL = 'http://localhost:3100/api';
 } else {
-  // Em produção no Vercel, usar a URL do backend (será configurada no Vercel)
-  // IMPORTANTE: Configure a variável de ambiente VITE_API_URL no Vercel
-  // com a URL do seu backend (ex: https://seu-backend.vercel.app/api)
-  API_BASE_URL = import.meta.env.VITE_API_URL || 'https://seu-backend.vercel.app/api';
+  // Em produção no Vercel, se VITE_API_URL não estiver definida
+  console.error('❌ ERRO CRÍTICO: Variável de ambiente VITE_API_URL não configurada!');
+  console.error('💡 SOLUÇÃO: Configure a variável VITE_API_URL no Vercel');
+  console.error('💡 1. Vá em Settings > Environment Variables');
+  console.error('💡 2. Adicione: Key: VITE_API_URL, Value: https://seu-backend.vercel.app/api');
+  console.error('💡 3. Faça um redeploy do frontend');
+  // Usar URL que causará erro claro - melhor do que usar URL errada
+  API_BASE_URL = 'https://CONFIGURE-VITE-API-URL.vercel.app/api';
 }
 
 // Log apenas em desenvolvimento
