@@ -239,7 +239,7 @@ const AdminDashboard = () => {
       {/* Gerenciamento do Sistema */}
       <Card className="p-6">
         <h2 className="text-lg font-semibold text-neutral-900 mb-4">Gerenciamento do Sistema</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="p-4 border border-neutral-200 rounded-lg">
             <h3 className="font-medium text-neutral-900 mb-3">Usuários</h3>
             <div className="space-y-2">
@@ -261,24 +261,6 @@ const AdminDashboard = () => {
               >
                 Gerenciar Cursos
               </Link>
-            </div>
-          </div>
-
-          <div className="p-4 border border-neutral-200 rounded-lg">
-            <h3 className="font-medium text-neutral-900 mb-3">Documentos</h3>
-            <div className="space-y-2">
-              <a
-                href="/certificates/pending"
-                className="block w-full px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 text-sm text-center"
-              >
-                Documentos Pendentes
-              </a>
-              <a
-                href="/certificates"
-                className="block w-full px-4 py-2 border border-neutral-300 text-neutral-700 rounded-lg hover:bg-neutral-50 text-sm text-center"
-              >
-                Gerenciar Documentos
-              </a>
             </div>
           </div>
         </div>

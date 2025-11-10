@@ -21,6 +21,7 @@ import MessagesPage from '../pages/MessagesPage';
 import ProfilePage from '../pages/Profile/ProfilePage';
 import GradesPage from '../pages/GradesPage';
 import AttendancePage from '../pages/AttendancePage';
+import RegisterAttendancePage from '../pages/Attendance/RegisterAttendancePage';
 import LessonsPage from '../pages/LessonsPage';
 import ExamsPage from '../pages/ExamsPage';
 import LessonFormPage from '../pages/Lessons/LessonFormPage';
@@ -223,6 +224,15 @@ const AppRoutes = () => {
           element={
             <ProtectedRoute>
               <AttendancePage />
+            </ProtectedRoute>
+          } 
+        />
+
+        <Route 
+          path="/attendance/register" 
+          element={
+            <ProtectedRoute allowedRoles={['teacher', 'admin']}>
+              <RegisterAttendancePage />
             </ProtectedRoute>
           } 
         />

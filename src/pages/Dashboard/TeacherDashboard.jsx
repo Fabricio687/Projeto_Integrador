@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import Card from '../../components/ui/Card';
 import Loading from '../../components/ui/Loading';
-import { Calendar, Users, BookOpen, FileText, MessageSquare } from 'lucide-react';
+import { Calendar, Users, BookOpen, FileText, MessageSquare, ClipboardCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const TeacherDashboard = () => {
@@ -204,7 +204,16 @@ const TeacherDashboard = () => {
       {/* Ações Rápidas */}
       <Card className="p-6">
         <h2 className="text-lg font-semibold text-neutral-900 mb-4">Ações Rápidas</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <Link
+            to="/attendance/register"
+            className="p-4 border border-neutral-200 rounded-lg hover:bg-purple-50 hover:border-purple-300 transition-colors bg-purple-50 border-purple-200"
+          >
+            <ClipboardCheck className="w-5 h-5 text-purple-600 mb-2" />
+            <p className="font-medium text-neutral-900">Registrar Presença</p>
+            <p className="text-xs text-neutral-600 mt-1">Registrar faltas dos alunos</p>
+          </Link>
+
           <Link
             to="/lessons"
             className="p-4 border border-neutral-200 rounded-lg hover:bg-blue-50 hover:border-blue-300 transition-colors"

@@ -1,10 +1,96 @@
 // src/components/layout/MainLayout.jsx
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
-import { Home, BookOpen, Calendar, User, Search, LogOut, FileText, MessageSquare, ClipboardList, Users } from 'lucide-react';
+import { Home, BookOpen, Calendar, User, Search, LogOut, FileText, MessageSquare, ClipboardList, Users, X } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
 import useAuth from '../../hooks/useAuth';
+import searchService from '../../services/search.service';
 
 const MainLayout = () => {
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState(null);
+  const [isSearching, setIsSearching] = useState(false);
+  const [showResults, setShowResults] = useState(false);
+  const searchTimeoutRef = useRef(null);
+  const searchRef = useRef(null);
+
+  // Buscar quando o usuário digitar
+  useEffect(() => {
+    if (searchTimeoutRef.current) {
+      clearTimeout(searchTimeoutRef.current);
+    }
+
+    if (searchQuery.trim().length === 0) {
+      setSearchResults(null);
+      setShowResults(false);
+      return;
+    }
+
+    if (searchQuery.trim().length < 2) {
+      return;
+    }
+
+    setIsSearching(true);
+    searchTimeoutRef.current = setTimeout(async () => {
+      try {
+        const response = await searchService.search(searchQuery);
+        setSearchResults(response.data);
+        setShowResults(true);
+      } catch (error) {
+        console.error('Erro ao buscar:', error);
+        setSearchResults(null);
+      } finally {
+        setIsSearching(false);
+      }
+    }, 300);
+  }, [searchQuery]);
+
+  // Fechar resultados ao clicar fora
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setShowResults(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleClearSearch = () => {
+    setSearchQuery('');
+    setSearchResults(null);
+    setShowResults(false);
+  };
+
+  const handleResultClick = (type, id) => {
+    setShowResults(false);
+    setSearchQuery('');
+    
+    switch (type) {
+      case 'course':
+        navigate(`/lessons?course=${id}`);
+        break;
+      case 'lesson':
+        navigate(`/lessons`);
+        break;
+      case 'exam':
+        navigate(`/exams`);
+        break;
+      case 'event':
+        navigate(`/calendar`);
+        break;
+      default:
+        break;
+    }
+  };
 
   return (
     <div className="flex min-h-screen bg-neutral-50">
@@ -189,15 +275,116 @@ const MainLayout = () => {
         {/* Header */}
         <header className="h-16 bg-white border-b border-neutral-200 flex items-center justify-between px-8">
           {/* Busca */}
-          <div className="flex-1 max-w-md">
+          <div className="flex-1 max-w-md" ref={searchRef}>
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
               <input
                 type="text"
                 placeholder="Buscar disciplinas, eventos..."
-                className="w-full pl-10 pr-4 py-2 border border-neutral-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                value={searchQuery}
+                onChange={handleSearchChange}
+                className="w-full pl-10 pr-10 py-2 border border-neutral-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 title="Buscar disciplinas, eventos..."
               />
+              {searchQuery && (
+                <button
+                  onClick={handleClearSearch}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-600"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              )}
+              
+              {/* Resultados da busca */}
+              {showResults && searchResults && (
+                <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-neutral-200 rounded-lg shadow-lg z-50 max-h-96 overflow-y-auto">
+                  {isSearching ? (
+                    <div className="p-4 text-center text-sm text-neutral-500">
+                      Buscando...
+                    </div>
+                  ) : searchResults.total === 0 ? (
+                    <div className="p-4 text-center text-sm text-neutral-500">
+                      Nenhum resultado encontrado
+                    </div>
+                  ) : (
+                    <div className="py-2">
+                      {/* Cursos */}
+                      {searchResults.courses && searchResults.courses.length > 0 && (
+                        <div className="px-4 py-2 border-b border-neutral-100">
+                          <h3 className="text-xs font-semibold text-neutral-500 uppercase mb-2">Cursos</h3>
+                          {searchResults.courses.map((course) => (
+                            <button
+                              key={course._id}
+                              onClick={() => handleResultClick('course', course._id)}
+                              className="w-full text-left px-3 py-2 hover:bg-neutral-50 rounded text-sm"
+                            >
+                              <div className="font-medium text-neutral-900">{course.name}</div>
+                              <div className="text-xs text-neutral-500">{course.code}</div>
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                      
+                      {/* Aulas */}
+                      {searchResults.lessons && searchResults.lessons.length > 0 && (
+                        <div className="px-4 py-2 border-b border-neutral-100">
+                          <h3 className="text-xs font-semibold text-neutral-500 uppercase mb-2">Aulas</h3>
+                          {searchResults.lessons.map((lesson) => (
+                            <button
+                              key={lesson._id}
+                              onClick={() => handleResultClick('lesson', lesson._id)}
+                              className="w-full text-left px-3 py-2 hover:bg-neutral-50 rounded text-sm"
+                            >
+                              <div className="font-medium text-neutral-900">{lesson.title || 'Aula'}</div>
+                              <div className="text-xs text-neutral-500">
+                                {lesson.course?.name || ''}
+                              </div>
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                      
+                      {/* Provas */}
+                      {searchResults.exams && searchResults.exams.length > 0 && (
+                        <div className="px-4 py-2 border-b border-neutral-100">
+                          <h3 className="text-xs font-semibold text-neutral-500 uppercase mb-2">Provas</h3>
+                          {searchResults.exams.map((exam) => (
+                            <button
+                              key={exam._id}
+                              onClick={() => handleResultClick('exam', exam._id)}
+                              className="w-full text-left px-3 py-2 hover:bg-neutral-50 rounded text-sm"
+                            >
+                              <div className="font-medium text-neutral-900">{exam.title || 'Prova'}</div>
+                              <div className="text-xs text-neutral-500">
+                                {exam.course?.name || ''}
+                              </div>
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                      
+                      {/* Eventos */}
+                      {searchResults.events && searchResults.events.length > 0 && (
+                        <div className="px-4 py-2">
+                          <h3 className="text-xs font-semibold text-neutral-500 uppercase mb-2">Eventos</h3>
+                          {searchResults.events.map((event) => (
+                            <button
+                              key={event._id}
+                              onClick={() => handleResultClick('event', event._id)}
+                              className="w-full text-left px-3 py-2 hover:bg-neutral-50 rounded text-sm"
+                            >
+                              <div className="font-medium text-neutral-900">{event.title || 'Evento'}</div>
+                              <div className="text-xs text-neutral-500">
+                                {event.course?.name || ''}
+                              </div>
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
 
