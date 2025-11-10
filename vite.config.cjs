@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  assetsInclude: ['**/*.jpg', '**/*.png', '**/*.svg'], // ← ADICIONAR
+  assetsInclude: ['**/*.jpg', '**/*.png', '**/*.svg'],
   server: {
     port: 5173,
     open: true,
@@ -14,5 +14,8 @@ export default defineConfig({
         secure: false,
       },
     },
+  },
+  build: {
+    outDir: 'dist',
   },
 });
