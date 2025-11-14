@@ -4,6 +4,7 @@ import { Home, BookOpen, Calendar, User, Search, LogOut, FileText, MessageSquare
 import { useState, useEffect, useRef } from 'react';
 import useAuth from '../../hooks/useAuth';
 import searchService from '../../services/search.service';
+import ThemeToggle from '../ui/ThemeToggle';
 
 const MainLayout = () => {
   const { user, logout } = useAuth();
@@ -93,16 +94,16 @@ const MainLayout = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-neutral-50">
+    <div className="flex min-h-screen bg-neutral-50 dark:bg-[#121826] transition-colors duration-250">
       {/* Sidebar */}
-      <aside className="w-60 bg-white border-r border-neutral-200 flex flex-col">
+      <aside className="w-60 bg-white dark:bg-[rgba(30,38,54,0.8)] border-r border-neutral-200 dark:border-[rgba(255,255,255,0.1)] flex flex-col backdrop-blur-sm">
         {/* Logo */}
-        <div className="h-16 flex items-center px-6 border-b border-neutral-200">
+        <div className="h-16 flex items-center px-6 border-b border-neutral-200 dark:border-[rgba(255,255,255,0.1)]">
           {/* Logo temporário usando div colorida */}
-          <div className="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-accent-blue to-accent-purple flex items-center justify-center shadow-soft-dark">
             <span className="text-white font-bold text-lg">PA</span>
           </div>
-          <span className="ml-3 font-semibold text-lg text-neutral-900">Portal do Aluno</span>
+          <span className="ml-3 font-semibold text-lg text-neutral-900 dark:text-[#E6EAF0]">Portal do Aluno</span>
         </div>
 
         {/* Navegação */}
@@ -110,10 +111,10 @@ const MainLayout = () => {
           <NavLink
             to="/dashboard"
             className={({ isActive }) =>
-              `flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${
+              `flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-250 ${
                 isActive
-                  ? 'bg-blue-50 text-blue-700 border-l-4 border-blue-600 pl-3'
-                  : 'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900'
+                  ? 'bg-accent-blue/10 dark:bg-accent-blue/20 text-accent-blue dark:text-accent-blue border-l-4 border-accent-blue pl-3'
+                  : 'text-neutral-600 dark:text-[#9CA3AF] hover:bg-neutral-100 dark:hover:bg-[rgba(255,255,255,0.05)] hover:text-neutral-900 dark:hover:text-[#E6EAF0]'
               }`
             }
           >
@@ -124,10 +125,10 @@ const MainLayout = () => {
           <NavLink
             to="/lessons"
             className={({ isActive }) =>
-              `flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${
+              `flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-250 ${
                 isActive
-                  ? 'bg-blue-50 text-blue-700 border-l-4 border-blue-600 pl-3'
-                  : 'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900'
+                  ? 'bg-accent-blue/10 dark:bg-accent-blue/20 text-accent-blue dark:text-accent-blue border-l-4 border-accent-blue pl-3'
+                  : 'text-neutral-600 dark:text-[#9CA3AF] hover:bg-neutral-100 dark:hover:bg-[rgba(255,255,255,0.05)] hover:text-neutral-900 dark:hover:text-[#E6EAF0]'
               }`
             }
           >
@@ -138,10 +139,10 @@ const MainLayout = () => {
           <NavLink
             to="/calendar"
             className={({ isActive }) =>
-              `flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${
+              `flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-250 ${
                 isActive
-                  ? 'bg-blue-50 text-blue-700 border-l-4 border-blue-600 pl-3'
-                  : 'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900'
+                  ? 'bg-accent-blue/10 dark:bg-accent-blue/20 text-accent-blue dark:text-accent-blue border-l-4 border-accent-blue pl-3'
+                  : 'text-neutral-600 dark:text-[#9CA3AF] hover:bg-neutral-100 dark:hover:bg-[rgba(255,255,255,0.05)] hover:text-neutral-900 dark:hover:text-[#E6EAF0]'
               }`
             }
           >
@@ -152,10 +153,10 @@ const MainLayout = () => {
           <NavLink
             to="/grades"
             className={({ isActive }) =>
-              `flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${
+              `flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-250 ${
                 isActive
-                  ? 'bg-blue-50 text-blue-700 border-l-4 border-blue-600 pl-3'
-                  : 'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900'
+                  ? 'bg-accent-blue/10 dark:bg-accent-blue/20 text-accent-blue dark:text-accent-blue border-l-4 border-accent-blue pl-3'
+                  : 'text-neutral-600 dark:text-[#9CA3AF] hover:bg-neutral-100 dark:hover:bg-[rgba(255,255,255,0.05)] hover:text-neutral-900 dark:hover:text-[#E6EAF0]'
               }`
             }
           >
@@ -166,10 +167,10 @@ const MainLayout = () => {
           <NavLink
             to="/lessons"
             className={({ isActive }) =>
-              `flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${
+              `flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-250 ${
                 isActive
-                  ? 'bg-blue-50 text-blue-700 border-l-4 border-blue-600 pl-3'
-                  : 'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900'
+                  ? 'bg-accent-blue/10 dark:bg-accent-blue/20 text-accent-blue dark:text-accent-blue border-l-4 border-accent-blue pl-3'
+                  : 'text-neutral-600 dark:text-[#9CA3AF] hover:bg-neutral-100 dark:hover:bg-[rgba(255,255,255,0.05)] hover:text-neutral-900 dark:hover:text-[#E6EAF0]'
               }`
             }
           >
@@ -180,10 +181,10 @@ const MainLayout = () => {
           <NavLink
             to="/exams"
             className={({ isActive }) =>
-              `flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${
+              `flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-250 ${
                 isActive
-                  ? 'bg-blue-50 text-blue-700 border-l-4 border-blue-600 pl-3'
-                  : 'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900'
+                  ? 'bg-accent-blue/10 dark:bg-accent-blue/20 text-accent-blue dark:text-accent-blue border-l-4 border-accent-blue pl-3'
+                  : 'text-neutral-600 dark:text-[#9CA3AF] hover:bg-neutral-100 dark:hover:bg-[rgba(255,255,255,0.05)] hover:text-neutral-900 dark:hover:text-[#E6EAF0]'
               }`
             }
           >
@@ -194,10 +195,10 @@ const MainLayout = () => {
           <NavLink
             to="/messages"
             className={({ isActive }) =>
-              `flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${
+              `flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-250 ${
                 isActive
-                  ? 'bg-blue-50 text-blue-700 border-l-4 border-blue-600 pl-3'
-                  : 'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900'
+                  ? 'bg-accent-blue/10 dark:bg-accent-blue/20 text-accent-blue dark:text-accent-blue border-l-4 border-accent-blue pl-3'
+                  : 'text-neutral-600 dark:text-[#9CA3AF] hover:bg-neutral-100 dark:hover:bg-[rgba(255,255,255,0.05)] hover:text-neutral-900 dark:hover:text-[#E6EAF0]'
               }`
             }
           >
@@ -208,10 +209,10 @@ const MainLayout = () => {
           <NavLink
             to="/profile"
             className={({ isActive }) =>
-              `flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${
+              `flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-250 ${
                 isActive
-                  ? 'bg-blue-50 text-blue-700 border-l-4 border-blue-600 pl-3'
-                  : 'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900'
+                  ? 'bg-accent-blue/10 dark:bg-accent-blue/20 text-accent-blue dark:text-accent-blue border-l-4 border-accent-blue pl-3'
+                  : 'text-neutral-600 dark:text-[#9CA3AF] hover:bg-neutral-100 dark:hover:bg-[rgba(255,255,255,0.05)] hover:text-neutral-900 dark:hover:text-[#E6EAF0]'
               }`
             }
           >
@@ -221,8 +222,8 @@ const MainLayout = () => {
 
           {(user?.role === 'admin' || user?.role === 'teacher') && (
             <>
-              <div className="mt-4 pt-4 border-t border-neutral-200">
-                <p className="px-4 text-xs font-semibold text-neutral-500 uppercase mb-2">Administração</p>
+              <div className="mt-4 pt-4 border-t border-neutral-200 dark:border-[rgba(255,255,255,0.1)]">
+                <p className="px-4 text-xs font-semibold text-neutral-500 dark:text-[#9CA3AF] uppercase mb-2">Administração</p>
               </div>
               
               {user?.role === 'admin' && (
@@ -244,25 +245,39 @@ const MainLayout = () => {
               <NavLink
                 to="/admin/courses"
                 className={({ isActive }) =>
-                  `flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${
+                  `flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-250 ${
                     isActive
-                      ? 'bg-blue-50 text-blue-700 border-l-4 border-blue-600 pl-3'
-                      : 'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900'
+                      ? 'bg-accent-blue/10 dark:bg-accent-blue/20 text-accent-blue dark:text-accent-blue border-l-4 border-accent-blue pl-3'
+                      : 'text-neutral-600 dark:text-[#9CA3AF] hover:bg-neutral-100 dark:hover:bg-[rgba(255,255,255,0.05)] hover:text-neutral-900 dark:hover:text-[#E6EAF0]'
                   }`
                 }
               >
                 <BookOpen className="w-5 h-5 flex-shrink-0" />
                 <span className="whitespace-nowrap">Gerenciar Cursos</span>
               </NavLink>
+              
+              <NavLink
+                to="/admin/documents"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-250 ${
+                    isActive
+                      ? 'bg-accent-blue/10 dark:bg-accent-blue/20 text-accent-blue dark:text-accent-blue border-l-4 border-accent-blue pl-3'
+                      : 'text-neutral-600 dark:text-[#9CA3AF] hover:bg-neutral-100 dark:hover:bg-[rgba(255,255,255,0.05)] hover:text-neutral-900 dark:hover:text-[#E6EAF0]'
+                  }`
+                }
+              >
+                <FileText className="w-5 h-5 flex-shrink-0" />
+                <span className="whitespace-nowrap">Documentos dos Alunos</span>
+              </NavLink>
             </>
           )}
         </nav>
 
         {/* Botão Sair */}
-        <div className="p-4 border-t border-neutral-200">
+        <div className="p-4 border-t border-neutral-200 dark:border-[rgba(255,255,255,0.1)]">
           <button
             onClick={logout}
-            className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-red-50 text-red-700 rounded-lg hover:bg-red-100 transition-colors font-medium text-sm"
+            className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-accent-red/10 dark:bg-accent-red/20 text-accent-red dark:text-accent-red rounded-lg hover:bg-accent-red/20 dark:hover:bg-accent-red/30 transition-all duration-250 font-medium text-sm shadow-soft dark:shadow-soft-dark"
           >
             <LogOut className="w-5 h-5" />
             <span>Sair</span>
@@ -273,7 +288,7 @@ const MainLayout = () => {
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
         {/* Header */}
-        <header className="h-16 bg-white border-b border-neutral-200 flex items-center justify-between px-8">
+        <header className="h-16 bg-white dark:bg-[rgba(30,38,54,0.8)] border-b border-neutral-200 dark:border-[rgba(255,255,255,0.1)] flex items-center justify-between px-8 backdrop-blur-sm">
           {/* Busca */}
           <div className="flex-1 max-w-md" ref={searchRef}>
             <div className="relative">
@@ -283,7 +298,7 @@ const MainLayout = () => {
                 placeholder="Buscar disciplinas, eventos..."
                 value={searchQuery}
                 onChange={handleSearchChange}
-                className="w-full pl-10 pr-10 py-2 border border-neutral-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full pl-10 pr-10 py-2 border border-neutral-300 dark:border-[rgba(255,255,255,0.1)] rounded-lg text-sm bg-white dark:bg-[rgba(30,38,54,0.6)] text-neutral-900 dark:text-[#E6EAF0] placeholder-neutral-400 dark:placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-accent-blue focus:border-transparent transition-all duration-250"
                 title="Buscar disciplinas, eventos..."
               />
               {searchQuery && (
@@ -297,7 +312,7 @@ const MainLayout = () => {
               
               {/* Resultados da busca */}
               {showResults && searchResults && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-neutral-200 rounded-lg shadow-lg z-50 max-h-96 overflow-y-auto">
+                <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-[rgba(30,38,54,0.95)] border border-neutral-200 dark:border-[rgba(255,255,255,0.1)] rounded-lg shadow-soft dark:shadow-soft-dark z-50 max-h-96 overflow-y-auto backdrop-blur-md">
                   {isSearching ? (
                     <div className="p-4 text-center text-sm text-neutral-500">
                       Buscando...
@@ -388,14 +403,15 @@ const MainLayout = () => {
             </div>
           </div>
 
-          {/* User Info */}
+          {/* User Info e Theme Toggle */}
           <div className="flex items-center gap-4">
+            <ThemeToggle />
             <div className="flex items-center gap-3">
               <div className="text-right">
-                <p className="text-sm font-medium text-neutral-900">{user?.name || 'Usuário'}</p>
-                <p className="text-xs text-neutral-500">{user?.course || user?.email || 'Curso'}</p>
+                <p className="text-sm font-medium text-neutral-900 dark:text-[#E6EAF0]">{user?.name || 'Usuário'}</p>
+                <p className="text-xs text-neutral-500 dark:text-[#9CA3AF]">{user?.course || user?.email || 'Curso'}</p>
               </div>
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-semibold">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent-blue to-accent-purple flex items-center justify-center text-white font-semibold shadow-soft-dark">
                 {user?.name?.charAt(0)?.toUpperCase() || 'U'}
               </div>
             </div>
@@ -403,7 +419,7 @@ const MainLayout = () => {
         </header>
 
         {/* Content */}
-        <main className="flex-1 overflow-auto">
+        <main className="flex-1 overflow-auto bg-neutral-50 dark:bg-[#121826] transition-colors duration-250">
           <Outlet />
         </main>
       </div>

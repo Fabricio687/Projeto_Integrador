@@ -53,8 +53,8 @@ const TeacherDashboard = () => {
   return (
     <div className="space-y-6 p-6">
       <div>
-        <h1 className="text-2xl font-bold text-neutral-900 mb-2">Painel do Professor</h1>
-        <p className="text-sm text-neutral-600">Gerencie suas aulas, provas e alunos</p>
+        <h1 className="text-2xl font-bold text-neutral-900 dark:text-[#E6EAF0] mb-2">Painel do Professor</h1>
+        <p className="text-sm text-neutral-600 dark:text-[#9CA3AF]">Gerencie suas aulas, provas e alunos</p>
       </div>
 
       {/* Estatísticas */}
@@ -62,13 +62,13 @@ const TeacherDashboard = () => {
         <Card className="p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-neutral-600 mb-1">Total de Cursos</p>
-              <p className="text-3xl font-bold text-neutral-900">
+              <p className="text-sm text-neutral-600 dark:text-[#9CA3AF] mb-1">Total de Cursos</p>
+              <p className="text-3xl font-bold text-neutral-900 dark:text-[#E6EAF0]">
                 {dashboardData?.totalCourses || 0}
               </p>
             </div>
-            <div className="p-3 rounded-lg bg-blue-100">
-              <BookOpen className="w-6 h-6 text-blue-600" />
+            <div className="p-3 rounded-lg bg-accent-blue/10 dark:bg-accent-blue/20">
+              <BookOpen className="w-6 h-6 text-accent-blue" />
             </div>
           </div>
         </Card>
@@ -76,13 +76,13 @@ const TeacherDashboard = () => {
         <Card className="p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-neutral-600 mb-1">Próximas Aulas</p>
-              <p className="text-3xl font-bold text-neutral-900">
+              <p className="text-sm text-neutral-600 dark:text-[#9CA3AF] mb-1">Próximas Aulas</p>
+              <p className="text-3xl font-bold text-neutral-900 dark:text-[#E6EAF0]">
                 {dashboardData?.nextLessons?.length || 0}
               </p>
             </div>
-            <div className="p-3 rounded-lg bg-green-100">
-              <Calendar className="w-6 h-6 text-green-600" />
+            <div className="p-3 rounded-lg bg-green-100 dark:bg-green-500/20">
+              <Calendar className="w-6 h-6 text-green-600 dark:text-green-400" />
             </div>
           </div>
         </Card>
@@ -90,13 +90,13 @@ const TeacherDashboard = () => {
         <Card className="p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-neutral-600 mb-1">Próximas Provas</p>
-              <p className="text-3xl font-bold text-neutral-900">
+              <p className="text-sm text-neutral-600 dark:text-[#9CA3AF] mb-1">Próximas Provas</p>
+              <p className="text-3xl font-bold text-neutral-900 dark:text-[#E6EAF0]">
                 {dashboardData?.nextExams?.length || 0}
               </p>
             </div>
-            <div className="p-3 rounded-lg bg-orange-100">
-              <FileText className="w-6 h-6 text-orange-600" />
+            <div className="p-3 rounded-lg bg-accent-yellow/10 dark:bg-accent-yellow/20">
+              <FileText className="w-6 h-6 text-accent-yellow" />
             </div>
           </div>
         </Card>
@@ -121,17 +121,17 @@ const TeacherDashboard = () => {
       {/* Próximas Aulas e Provas */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card className="p-6">
-          <h2 className="text-lg font-semibold text-neutral-900 mb-4">Próximas Aulas</h2>
+          <h2 className="text-lg font-semibold text-neutral-900 dark:text-[#E6EAF0] mb-4">Próximas Aulas</h2>
           {dashboardData?.nextLessons && dashboardData.nextLessons.length > 0 ? (
             <div className="space-y-3">
               {dashboardData.nextLessons.map((lesson, index) => (
-                <div key={index} className="flex items-start gap-3 p-3 bg-neutral-50 rounded-lg">
-                  <Calendar className="w-5 h-5 text-blue-600 mt-0.5" />
+                <div key={index} className="flex items-start gap-3 p-3 bg-neutral-50 dark:bg-[rgba(255,255,255,0.05)] rounded-lg transition-all duration-250 hover:bg-neutral-100 dark:hover:bg-[rgba(255,255,255,0.1)]">
+                  <Calendar className="w-5 h-5 text-accent-blue mt-0.5" />
                   <div className="flex-1">
-                    <p className="font-medium text-neutral-900">
+                    <p className="font-medium text-neutral-900 dark:text-[#E6EAF0]">
                       {lesson.course?.name || lesson.title || 'Aula'}
                     </p>
-                    <p className="text-sm text-neutral-600">
+                    <p className="text-sm text-neutral-600 dark:text-[#9CA3AF]">
                       {new Date(lesson.date).toLocaleDateString('pt-BR')} às{' '}
                       {new Date(lesson.date).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}
                     </p>
@@ -140,21 +140,21 @@ const TeacherDashboard = () => {
               ))}
             </div>
           ) : (
-            <p className="text-sm text-neutral-500">Não há aulas agendadas.</p>
+            <p className="text-sm text-neutral-500 dark:text-[#9CA3AF]">Não há aulas agendadas.</p>
           )}
         </Card>
 
         <Card className="p-6">
-          <h2 className="text-lg font-semibold text-neutral-900 mb-4">Próximas Avaliações</h2>
+          <h2 className="text-lg font-semibold text-neutral-900 dark:text-[#E6EAF0] mb-4">Próximas Avaliações</h2>
           {dashboardData?.nextExams && dashboardData.nextExams.length > 0 ? (
             <div className="space-y-3">
               {dashboardData.nextExams.map((exam, index) => (
-                <div key={index} className="flex items-start gap-3 p-3 bg-red-50 rounded-lg border border-red-100">
-                  <FileText className="w-5 h-5 text-red-600 mt-0.5" />
+                <div key={index} className="flex items-start gap-3 p-3 bg-accent-red/10 dark:bg-accent-red/20 rounded-lg border border-accent-red/20 dark:border-accent-red/30 transition-all duration-250 hover:bg-accent-red/20 dark:hover:bg-accent-red/30">
+                  <FileText className="w-5 h-5 text-accent-red mt-0.5" />
                   <div className="flex-1">
-                    <p className="font-medium text-neutral-900">{exam.title || 'Avaliação'}</p>
-                    <p className="text-sm text-neutral-600">{exam.course?.name || ''}</p>
-                    <p className="text-xs text-neutral-500 mt-1">
+                    <p className="font-medium text-neutral-900 dark:text-[#E6EAF0]">{exam.title || 'Avaliação'}</p>
+                    <p className="text-sm text-neutral-600 dark:text-[#9CA3AF]">{exam.course?.name || ''}</p>
+                    <p className="text-xs text-neutral-500 dark:text-[#9CA3AF] mt-1">
                       {new Date(exam.date).toLocaleDateString('pt-BR')}
                     </p>
                   </div>
@@ -162,7 +162,7 @@ const TeacherDashboard = () => {
               ))}
             </div>
           ) : (
-            <p className="text-sm text-neutral-500">Não há avaliações agendadas.</p>
+            <p className="text-sm text-neutral-500 dark:text-[#9CA3AF]">Não há avaliações agendadas.</p>
           )}
         </Card>
       </div>
@@ -203,42 +203,42 @@ const TeacherDashboard = () => {
 
       {/* Ações Rápidas */}
       <Card className="p-6">
-        <h2 className="text-lg font-semibold text-neutral-900 mb-4">Ações Rápidas</h2>
+        <h2 className="text-lg font-semibold text-neutral-900 dark:text-[#E6EAF0] mb-4">Ações Rápidas</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <Link
             to="/attendance/register"
-            className="p-4 border border-neutral-200 rounded-lg hover:bg-purple-50 hover:border-purple-300 transition-colors bg-purple-50 border-purple-200"
+            className="p-4 border border-neutral-200 dark:border-[rgba(255,255,255,0.1)] rounded-lg hover:bg-accent-purple/10 dark:hover:bg-accent-purple/20 hover:border-accent-purple transition-all duration-250 bg-accent-purple/5 dark:bg-accent-purple/10"
           >
-            <ClipboardCheck className="w-5 h-5 text-purple-600 mb-2" />
-            <p className="font-medium text-neutral-900">Registrar Presença</p>
-            <p className="text-xs text-neutral-600 mt-1">Registrar faltas dos alunos</p>
+            <ClipboardCheck className="w-5 h-5 text-accent-purple mb-2" />
+            <p className="font-medium text-neutral-900 dark:text-[#E6EAF0]">Registrar Presença</p>
+            <p className="text-xs text-neutral-600 dark:text-[#9CA3AF] mt-1">Registrar faltas dos alunos</p>
           </Link>
 
           <Link
             to="/lessons"
-            className="p-4 border border-neutral-200 rounded-lg hover:bg-blue-50 hover:border-blue-300 transition-colors"
+            className="p-4 border border-neutral-200 dark:border-[rgba(255,255,255,0.1)] rounded-lg hover:bg-accent-blue/10 dark:hover:bg-accent-blue/20 hover:border-accent-blue transition-all duration-250"
           >
-            <Calendar className="w-5 h-5 text-blue-600 mb-2" />
-            <p className="font-medium text-neutral-900">Agendar Nova Aula</p>
-            <p className="text-xs text-neutral-600 mt-1">Ver todas as aulas</p>
+            <Calendar className="w-5 h-5 text-accent-blue mb-2" />
+            <p className="font-medium text-neutral-900 dark:text-[#E6EAF0]">Agendar Nova Aula</p>
+            <p className="text-xs text-neutral-600 dark:text-[#9CA3AF] mt-1">Ver todas as aulas</p>
           </Link>
 
           <Link
             to="/exams"
-            className="p-4 border border-neutral-200 rounded-lg hover:bg-orange-50 hover:border-orange-300 transition-colors"
+            className="p-4 border border-neutral-200 dark:border-[rgba(255,255,255,0.1)] rounded-lg hover:bg-accent-yellow/10 dark:hover:bg-accent-yellow/20 hover:border-accent-yellow transition-all duration-250"
           >
-            <FileText className="w-5 h-5 text-orange-600 mb-2" />
-            <p className="font-medium text-neutral-900">Criar Nova Avaliação</p>
-            <p className="text-xs text-neutral-600 mt-1">Ver todas as avaliações</p>
+            <FileText className="w-5 h-5 text-accent-yellow mb-2" />
+            <p className="font-medium text-neutral-900 dark:text-[#E6EAF0]">Criar Nova Avaliação</p>
+            <p className="text-xs text-neutral-600 dark:text-[#9CA3AF] mt-1">Ver todas as avaliações</p>
           </Link>
 
           <Link
             to="/messages"
-            className="p-4 border border-neutral-200 rounded-lg hover:bg-green-50 hover:border-green-300 transition-colors"
+            className="p-4 border border-neutral-200 dark:border-[rgba(255,255,255,0.1)] rounded-lg hover:bg-green-500/10 dark:hover:bg-green-500/20 hover:border-green-500 transition-all duration-250"
           >
-            <MessageSquare className="w-5 h-5 text-green-600 mb-2" />
-            <p className="font-medium text-neutral-900">Enviar Mensagem</p>
-            <p className="text-xs text-neutral-600 mt-1">Comunicar com alunos</p>
+            <MessageSquare className="w-5 h-5 text-green-500 dark:text-green-400 mb-2" />
+            <p className="font-medium text-neutral-900 dark:text-[#E6EAF0]">Enviar Mensagem</p>
+            <p className="text-xs text-neutral-600 dark:text-[#9CA3AF] mt-1">Comunicar com alunos</p>
           </Link>
         </div>
       </Card>

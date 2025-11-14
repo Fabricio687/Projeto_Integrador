@@ -4,9 +4,33 @@
 
 /* Reset suave e tipografia */
 :root {
+  /* Light Theme */
   --bg: #ffffff;
+  --bg-secondary: #fafafa;
+  --card: #ffffff;
   --fg: #0a0a0a;
-  --muted: #6b7280; /* neutral-500 */
+  --fg-secondary: #374151;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --accent-blue: #2563eb;
+  --accent-purple: #7c3aed;
+  --accent-red: #dc2626;
+  --accent-yellow: #f59e0b;
+}
+
+.dark {
+  /* Dark Theme */
+  --bg: #121826;
+  --bg-secondary: #0f1419;
+  --card: rgba(30, 38, 54, 0.8);
+  --fg: #E6EAF0;
+  --fg-secondary: #9CA3AF;
+  --muted: #6b7280;
+  --border: rgba(255, 255, 255, 0.1);
+  --accent-blue: #5BC0F8;
+  --accent-purple: #A259FF;
+  --accent-red: #FF6B6B;
+  --accent-yellow: #FFD93D;
 }
 
 * {
@@ -15,13 +39,15 @@
 
 html, body, #root {
   height: 100%;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 body {
-  background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+  background: var(--bg);
   color: var(--fg);
   font-feature-settings: "liga" 1, "kern" 1;
   text-rendering: optimizeLegibility;
+  font-family: 'Inter', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 /* Scrollbar discreta */
@@ -30,16 +56,20 @@ body {
   width: 10px;
 }
 *::-webkit-scrollbar-track {
-  background: #f3f4f6; /* neutral-100 */
+  background: var(--bg-secondary);
 }
 *::-webkit-scrollbar-thumb {
-  background-color: #d1d5db; /* neutral-300 */
+  background-color: var(--muted);
   border-radius: 20px;
-  border: 2px solid #f3f4f6;
+  border: 2px solid var(--bg-secondary);
+}
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--fg-secondary);
 }
 
 a {
-  color: #1d4ed8; /* blue-700 */
+  color: var(--accent-blue);
+  transition: color 0.25s ease;
 }
 a:hover {
   text-decoration: underline;
@@ -52,9 +82,11 @@ a:hover {
 
 /* Sombras suaves para cards */
 .shadow-soft {
-  box-shadow:
-    0 1px 2px rgba(0,0,0,0.04),
-    0 8px 24px rgba(0,0,0,0.06);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06);
+}
+
+.dark .shadow-soft {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
 /* Animações utilitárias */
@@ -66,12 +98,47 @@ a:hover {
   to   { opacity: 1; transform: translateY(0) }
 }
 
+.slide-up {
+  animation: slide-up 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(10px) }
+  to   { opacity: 1; transform: translateY(0) }
+}
+
 /* Estados de formulário */
 input::placeholder {
-  color: #9ca3af; /* neutral-400 */
+  color: var(--muted);
 }
 
 /* Helpers para badges, chips etc. */
 .badge {
-  @apply rounded-full bg-neutral-100 px-2 py-0.5 text-xs text-neutral-700;
+  @apply rounded-full px-2 py-0.5 text-xs font-medium;
+  background: var(--bg-secondary);
+  color: var(--fg-secondary);
+}
+
+/* Transições suaves */
+.transition-smooth {
+  transition: all 0.25s ease;
+}
+
+/* Gradientes */
+.gradient-border {
+  position: relative;
+  background: var(--card);
+  border: 1px solid var(--border);
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.3;
 }

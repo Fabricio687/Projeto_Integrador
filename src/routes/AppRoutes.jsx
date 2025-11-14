@@ -21,6 +21,7 @@ import MessagesPage from '../pages/MessagesPage';
 import ProfilePage from '../pages/Profile/ProfilePage';
 import GradesPage from '../pages/GradesPage';
 import AttendancePage from '../pages/AttendancePage';
+import AttendanceCalendarPage from '../pages/Attendance/AttendanceCalendarPage';
 import RegisterAttendancePage from '../pages/Attendance/RegisterAttendancePage';
 import LessonsPage from '../pages/LessonsPage';
 import ExamsPage from '../pages/ExamsPage';
@@ -227,6 +228,15 @@ const AppRoutes = () => {
             </ProtectedRoute>
           } 
         />
+        
+        <Route 
+          path="/attendance/calendar" 
+          element={
+            <ProtectedRoute>
+              <AttendanceCalendarPage />
+            </ProtectedRoute>
+          } 
+        />
 
         <Route 
           path="/attendance/register" 
@@ -269,6 +279,34 @@ const AppRoutes = () => {
           element={
             <ProtectedRoute allowedRoles={['admin']}>
               <UsersManagementPage />
+            </ProtectedRoute>
+          } 
+        />
+
+        {/* Rotas de Documentos */}
+        <Route 
+          path="/documents" 
+          element={
+            <ProtectedRoute>
+              <MyDocumentsPage />
+            </ProtectedRoute>
+          } 
+        />
+        
+        <Route 
+          path="/documents/upload" 
+          element={
+            <ProtectedRoute>
+              <UploadDocumentPage />
+            </ProtectedRoute>
+          } 
+        />
+        
+        <Route 
+          path="/admin/documents" 
+          element={
+            <ProtectedRoute allowedRoles={['admin', 'teacher']}>
+              <StudentDocumentsPage />
             </ProtectedRoute>
           } 
         />
