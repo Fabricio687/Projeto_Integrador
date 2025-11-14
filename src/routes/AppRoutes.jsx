@@ -30,6 +30,9 @@ import ExamFormPage from '../pages/Exams/ExamFormPage';
 import GradeFormPage from '../pages/Grades/GradeFormPage';
 import CoursesManagementPage from '../pages/Admin/CoursesManagementPage';
 import UsersManagementPage from '../pages/Admin/UsersManagementPage';
+import MyDocumentsPage from '../pages/Documents/MyDocumentsPage';
+import UploadDocumentPage from '../pages/Documents/UploadDocumentPage';
+import StudentDocumentsPage from '../pages/Documents/StudentDocumentsPage';
 
 // Componente para rotas protegidas
 const ProtectedRoute = ({ children, allowedRoles = [] }) => {
