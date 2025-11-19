@@ -32,12 +32,12 @@ export default function LessonSchedule({ courseId, canManage = false }) {
   }, [courseId]);
 
   if (!courseId) {
-    return <div className="text-sm text-neutral-600">Selecione um curso para ver as aulas.</div>;
+    return <div className="text-sm text-neutral-600 dark:text-[#9CA3AF]">Selecione um curso para ver as aulas.</div>;
   }
 
   if (loading) return <Loading text="Carregando aulas..." />;
-  if (err) return <div className="text-sm text-red-600">{err}</div>;
-  if (!items.length) return <div className="text-sm text-neutral-600">Nenhuma aula encontrada.</div>;
+  if (err) return <div className="text-sm text-red-600 dark:text-red-400">{err}</div>;
+  if (!items.length) return <div className="text-sm text-neutral-600 dark:text-[#9CA3AF]">Nenhuma aula encontrada.</div>;
 
   const handleEdit = (lesson) => {
     navigate('/lessons/new', { state: { lesson, courseId } });

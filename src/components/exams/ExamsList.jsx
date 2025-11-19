@@ -31,10 +31,10 @@ export default function ExamsList({ courseId, canManage = false }) {
     if (courseId) fetchData();
   }, [courseId]);
 
-  if (!courseId) return <div className="text-sm text-neutral-600">Selecione um curso para ver as provas.</div>;
+  if (!courseId) return <div className="text-sm text-neutral-600 dark:text-[#9CA3AF]">Selecione um curso para ver as provas.</div>;
   if (loading) return <Loading text="Carregando provas..." />;
-  if (err) return <div className="text-sm text-red-600">{err}</div>;
-  if (!items.length) return <div className="text-sm text-neutral-600">Nenhuma prova encontrada.</div>;
+  if (err) return <div className="text-sm text-red-600 dark:text-red-400">{err}</div>;
+  if (!items.length) return <div className="text-sm text-neutral-600 dark:text-[#9CA3AF]">Nenhuma prova encontrada.</div>;
 
   const handleEdit = (exam) => {
     navigate('/exams/new', { state: { exam, courseId } });

@@ -38,7 +38,15 @@ const attendanceService = {
   getCourseStudents: async (courseId) => {
     try {
       const response = await api.get(`/attendance/course/${courseId}/students`);
-      return response.data;
+      // Garantir estrutura consistente
+      if (response.data) {
+        return {
+          success: response.data.success !== false,
+          data: response.data.data || response.data,
+          message: response.data.message
+        };
+      }
+      return response;
     } catch (error) {
       console.error('Erro ao buscar alunos do curso:', error);
       throw error;
@@ -68,7 +76,16 @@ const attendanceService = {
   createMultipleAttendances: async (data) => {
     try {
       const response = await api.post('/attendance/multiple', data);
-      return response.data;
+      // Garantir estrutura consistente
+      if (response.data) {
+        return {
+          success: response.data.success !== false,
+          data: response.data.data || response.data,
+          message: response.data.message,
+          errors: response.data.errors
+        };
+      }
+      return response;
     } catch (error) {
       console.error('Erro ao criar registros de presença:', error);
       throw error;

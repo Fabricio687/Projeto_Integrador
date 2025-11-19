@@ -85,8 +85,8 @@ export default function ProfilePage() {
   return (
     <div className="space-y-6 p-6">
       <Card>
-        <h1 className="text-xl font-semibold text-neutral-900 mb-2">Meu Perfil</h1>
-        <p className="text-sm text-neutral-600">
+        <h1 className="text-xl font-semibold text-neutral-900 dark:text-[#E6EAF0] mb-2">Meu Perfil</h1>
+        <p className="text-sm text-neutral-600 dark:text-[#9CA3AF]">
           Gerencie suas informações pessoais
         </p>
       </Card>
@@ -107,17 +107,17 @@ export default function ProfilePage() {
               type="email"
               value={form.email}
               disabled
-              className="bg-neutral-50"
+              className="bg-neutral-50 dark:bg-[rgba(255,255,255,0.05)]"
             />
             <Input
               label="Matrícula"
               name="registration"
               value={form.registration}
               disabled
-              className="bg-neutral-50"
+              className="bg-neutral-50 dark:bg-[rgba(255,255,255,0.05)]"
             />
             <div>
-              <label className="block text-sm font-medium text-neutral-700 mb-1">Curso</label>
+              <label className="block text-sm font-medium text-neutral-700 dark:text-[#E6EAF0] mb-1">Curso</label>
               <CourseSelector
                 value={form.course}
                 onChange={(e) => setForm({ ...form, course: e.target.value })}
@@ -137,8 +137,8 @@ export default function ProfilePage() {
           {message && (
             <div className={`p-3 rounded-lg text-sm ${
               message.type === 'success' 
-                ? 'bg-green-50 text-green-700 border border-green-200' 
-                : 'bg-red-50 text-red-700 border border-red-200'
+                ? 'bg-green-50 dark:bg-green-500/20 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-500/30' 
+                : 'bg-red-50 dark:bg-red-500/20 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-500/30'
             }`}>
               {message.text}
             </div>

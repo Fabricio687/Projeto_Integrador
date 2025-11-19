@@ -220,6 +220,20 @@ const MainLayout = () => {
             <span className="whitespace-nowrap">Perfil</span>
           </NavLink>
 
+          <NavLink
+            to="/documents"
+            className={({ isActive }) =>
+              `flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-250 ${
+                isActive
+                  ? 'bg-accent-blue/10 dark:bg-accent-blue/20 text-accent-blue dark:text-accent-blue border-l-4 border-accent-blue pl-3'
+                  : 'text-neutral-600 dark:text-[#9CA3AF] hover:bg-neutral-100 dark:hover:bg-[rgba(255,255,255,0.05)] hover:text-neutral-900 dark:hover:text-[#E6EAF0]'
+              }`
+            }
+          >
+            <FileText className="w-5 h-5 flex-shrink-0" />
+            <span className="whitespace-nowrap">Documentos</span>
+          </NavLink>
+
           {(user?.role === 'admin' || user?.role === 'teacher') && (
             <>
               <div className="mt-4 pt-4 border-t border-neutral-200 dark:border-[rgba(255,255,255,0.1)]">
@@ -230,10 +244,10 @@ const MainLayout = () => {
                 <NavLink
                   to="/admin/users"
                   className={({ isActive }) =>
-                    `flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${
+                    `flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-250 ${
                       isActive
-                        ? 'bg-blue-50 text-blue-700 border-l-4 border-blue-600 pl-3'
-                        : 'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900'
+                        ? 'bg-accent-blue/10 dark:bg-accent-blue/20 text-accent-blue dark:text-accent-blue border-l-4 border-accent-blue pl-3'
+                        : 'text-neutral-600 dark:text-[#9CA3AF] hover:bg-neutral-100 dark:hover:bg-[rgba(255,255,255,0.05)] hover:text-neutral-900 dark:hover:text-[#E6EAF0]'
                     }`
                   }
                 >
@@ -304,7 +318,7 @@ const MainLayout = () => {
               {searchQuery && (
                 <button
                   onClick={handleClearSearch}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-600"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-[#9CA3AF] hover:text-neutral-600 dark:hover:text-[#E6EAF0] transition-colors"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -314,27 +328,27 @@ const MainLayout = () => {
               {showResults && searchResults && (
                 <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-[rgba(30,38,54,0.95)] border border-neutral-200 dark:border-[rgba(255,255,255,0.1)] rounded-lg shadow-soft dark:shadow-soft-dark z-50 max-h-96 overflow-y-auto backdrop-blur-md">
                   {isSearching ? (
-                    <div className="p-4 text-center text-sm text-neutral-500">
+                    <div className="p-4 text-center text-sm text-neutral-500 dark:text-[#9CA3AF]">
                       Buscando...
                     </div>
                   ) : searchResults.total === 0 ? (
-                    <div className="p-4 text-center text-sm text-neutral-500">
+                    <div className="p-4 text-center text-sm text-neutral-500 dark:text-[#9CA3AF]">
                       Nenhum resultado encontrado
                     </div>
                   ) : (
                     <div className="py-2">
                       {/* Cursos */}
                       {searchResults.courses && searchResults.courses.length > 0 && (
-                        <div className="px-4 py-2 border-b border-neutral-100">
-                          <h3 className="text-xs font-semibold text-neutral-500 uppercase mb-2">Cursos</h3>
+                        <div className="px-4 py-2 border-b border-neutral-100 dark:border-[rgba(255,255,255,0.1)]">
+                          <h3 className="text-xs font-semibold text-neutral-500 dark:text-[#9CA3AF] uppercase mb-2">Cursos</h3>
                           {searchResults.courses.map((course) => (
                             <button
                               key={course._id}
                               onClick={() => handleResultClick('course', course._id)}
-                              className="w-full text-left px-3 py-2 hover:bg-neutral-50 rounded text-sm"
+                              className="w-full text-left px-3 py-2 hover:bg-neutral-50 dark:hover:bg-[rgba(255,255,255,0.05)] rounded text-sm transition-colors"
                             >
-                              <div className="font-medium text-neutral-900">{course.name}</div>
-                              <div className="text-xs text-neutral-500">{course.code}</div>
+                              <div className="font-medium text-neutral-900 dark:text-[#E6EAF0]">{course.name}</div>
+                              <div className="text-xs text-neutral-500 dark:text-[#9CA3AF]">{course.code}</div>
                             </button>
                           ))}
                         </div>
@@ -342,16 +356,16 @@ const MainLayout = () => {
                       
                       {/* Aulas */}
                       {searchResults.lessons && searchResults.lessons.length > 0 && (
-                        <div className="px-4 py-2 border-b border-neutral-100">
-                          <h3 className="text-xs font-semibold text-neutral-500 uppercase mb-2">Aulas</h3>
+                        <div className="px-4 py-2 border-b border-neutral-100 dark:border-[rgba(255,255,255,0.1)]">
+                          <h3 className="text-xs font-semibold text-neutral-500 dark:text-[#9CA3AF] uppercase mb-2">Aulas</h3>
                           {searchResults.lessons.map((lesson) => (
                             <button
                               key={lesson._id}
                               onClick={() => handleResultClick('lesson', lesson._id)}
-                              className="w-full text-left px-3 py-2 hover:bg-neutral-50 rounded text-sm"
+                              className="w-full text-left px-3 py-2 hover:bg-neutral-50 dark:hover:bg-[rgba(255,255,255,0.05)] rounded text-sm transition-colors"
                             >
-                              <div className="font-medium text-neutral-900">{lesson.title || 'Aula'}</div>
-                              <div className="text-xs text-neutral-500">
+                              <div className="font-medium text-neutral-900 dark:text-[#E6EAF0]">{lesson.title || 'Aula'}</div>
+                              <div className="text-xs text-neutral-500 dark:text-[#9CA3AF]">
                                 {lesson.course?.name || ''}
                               </div>
                             </button>
@@ -361,16 +375,16 @@ const MainLayout = () => {
                       
                       {/* Provas */}
                       {searchResults.exams && searchResults.exams.length > 0 && (
-                        <div className="px-4 py-2 border-b border-neutral-100">
-                          <h3 className="text-xs font-semibold text-neutral-500 uppercase mb-2">Provas</h3>
+                        <div className="px-4 py-2 border-b border-neutral-100 dark:border-[rgba(255,255,255,0.1)]">
+                          <h3 className="text-xs font-semibold text-neutral-500 dark:text-[#9CA3AF] uppercase mb-2">Provas</h3>
                           {searchResults.exams.map((exam) => (
                             <button
                               key={exam._id}
                               onClick={() => handleResultClick('exam', exam._id)}
-                              className="w-full text-left px-3 py-2 hover:bg-neutral-50 rounded text-sm"
+                              className="w-full text-left px-3 py-2 hover:bg-neutral-50 dark:hover:bg-[rgba(255,255,255,0.05)] rounded text-sm transition-colors"
                             >
-                              <div className="font-medium text-neutral-900">{exam.title || 'Prova'}</div>
-                              <div className="text-xs text-neutral-500">
+                              <div className="font-medium text-neutral-900 dark:text-[#E6EAF0]">{exam.title || 'Prova'}</div>
+                              <div className="text-xs text-neutral-500 dark:text-[#9CA3AF]">
                                 {exam.course?.name || ''}
                               </div>
                             </button>
@@ -381,15 +395,15 @@ const MainLayout = () => {
                       {/* Eventos */}
                       {searchResults.events && searchResults.events.length > 0 && (
                         <div className="px-4 py-2">
-                          <h3 className="text-xs font-semibold text-neutral-500 uppercase mb-2">Eventos</h3>
+                          <h3 className="text-xs font-semibold text-neutral-500 dark:text-[#9CA3AF] uppercase mb-2">Eventos</h3>
                           {searchResults.events.map((event) => (
                             <button
                               key={event._id}
                               onClick={() => handleResultClick('event', event._id)}
-                              className="w-full text-left px-3 py-2 hover:bg-neutral-50 rounded text-sm"
+                              className="w-full text-left px-3 py-2 hover:bg-neutral-50 dark:hover:bg-[rgba(255,255,255,0.05)] rounded text-sm transition-colors"
                             >
-                              <div className="font-medium text-neutral-900">{event.title || 'Evento'}</div>
-                              <div className="text-xs text-neutral-500">
+                              <div className="font-medium text-neutral-900 dark:text-[#E6EAF0]">{event.title || 'Evento'}</div>
+                              <div className="text-xs text-neutral-500 dark:text-[#9CA3AF]">
                                 {event.course?.name || ''}
                               </div>
                             </button>

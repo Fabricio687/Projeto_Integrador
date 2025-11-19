@@ -44,7 +44,7 @@ const CourseSelector = ({
   if (loading) {
     return (
       <div className={`relative ${className}`}>
-        <div className="w-full rounded-md border border-neutral-300 bg-neutral-50 px-3 py-2 text-sm text-neutral-500 flex items-center">
+        <div className="w-full rounded-md border border-neutral-300 dark:border-[rgba(255,255,255,0.1)] bg-neutral-50 dark:bg-[rgba(255,255,255,0.05)] px-3 py-2 text-sm text-neutral-500 dark:text-[#9CA3AF] flex items-center">
           <div className="mr-2 h-4 w-4">
             <Loading size="sm" />
           </div>
@@ -57,7 +57,7 @@ const CourseSelector = ({
   if (error) {
     return (
       <div className={`relative ${className}`}>
-        <div className="w-full rounded-md border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-600">
+        <div className="w-full rounded-md border border-red-300 dark:border-red-500/30 bg-red-50 dark:bg-red-500/20 px-3 py-2 text-sm text-red-600 dark:text-red-400">
           {error}
         </div>
       </div>
@@ -69,7 +69,7 @@ const CourseSelector = ({
       <select
         value={value || ''}
         onChange={onChange}
-        className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm outline-none focus:border-blue-500 focus:ring focus:ring-blue-100 transition-all duration-200 bg-white"
+        className="w-full rounded-md border border-neutral-300 dark:border-[rgba(255,255,255,0.1)] bg-white dark:bg-[rgba(30,38,54,0.6)] px-3 py-2 text-sm text-neutral-900 dark:text-[#E6EAF0] outline-none focus:border-blue-500 dark:focus:border-accent-blue focus:ring focus:ring-blue-100 dark:focus:ring-accent-blue/20 transition-all duration-200"
         required={required}
         disabled={disabled}
       >
@@ -82,7 +82,7 @@ const CourseSelector = ({
       </select>
       
       {/* Indicador de seta personalizado para melhor UX */}
-      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-neutral-500">
+      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-neutral-500 dark:text-[#9CA3AF]">
         <svg className="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
           <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
         </svg>

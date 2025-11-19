@@ -40,6 +40,7 @@ export default function Sidebar() {
             <LinkItem to="/lessons">Gerir Aulas</LinkItem>
             <LinkItem to="/exams">Gerir Provas</LinkItem>
             <LinkItem to="/grades">Lançar Notas</LinkItem>
+            <LinkItem to="/attendance/register">Registrar Presença</LinkItem>
           </div>
         </>
       )}

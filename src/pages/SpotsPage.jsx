@@ -11,13 +11,13 @@ export default function SpotsPage() {
   return (
     <div className="space-y-6">
       <Card>
-        <h1 className="text-base font-semibold text-neutral-900">Vagas</h1>
-        <p className="text-sm text-neutral-600">Reserve e gerencie vagas disponíveis.</p>
+        <h1 className="text-base font-semibold text-neutral-900 dark:text-[#E6EAF0]">Vagas</h1>
+        <p className="text-sm text-neutral-600 dark:text-[#9CA3AF]">Reserve e gerencie vagas disponíveis.</p>
       </Card>
 
       {canManage && (
         <Card>
-          <h2 className="mb-3 text-sm font-semibold text-neutral-900">Criar nova vaga</h2>
+          <h2 className="mb-3 text-sm font-semibold text-neutral-900 dark:text-[#E6EAF0]">Criar nova vaga</h2>
           <CreateSpotForm onCreated={() => window.location.reload()} />
         </Card>
       )}

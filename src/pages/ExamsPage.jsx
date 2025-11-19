@@ -45,15 +45,15 @@ export default function ExamsPage() {
       <Card>
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div>
-            <h1 className="text-base font-semibold text-neutral-900">Provas</h1>
-            <p className="text-sm text-neutral-600">Acompanhe o cronograma de avaliações por curso.</p>
+            <h1 className="text-base font-semibold text-neutral-900 dark:text-[#E6EAF0]">Provas</h1>
+            <p className="text-sm text-neutral-600 dark:text-[#9CA3AF]">Acompanhe o cronograma de avaliações por curso.</p>
           </div>
           <div className="flex flex-col sm:flex-row items-center gap-2 w-full sm:w-auto">
             <div className="relative w-full sm:w-64">
               <select
                 value={courseId}
                 onChange={(e) => setCourseId(e.target.value)}
-                className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm outline-none focus:border-blue-500 focus:ring focus:ring-blue-100 transition-all duration-200 appearance-none"
+                className="w-full rounded-md border border-neutral-300 dark:border-[rgba(255,255,255,0.1)] bg-white dark:bg-[rgba(30,38,54,0.6)] px-3 py-2 text-sm text-neutral-900 dark:text-[#E6EAF0] outline-none focus:border-blue-500 dark:focus:border-accent-blue focus:ring focus:ring-blue-100 dark:focus:ring-accent-blue/20 transition-all duration-200 appearance-none"
               >
                 <option value="">Selecione um curso</option>
                 {courses.map((course) => (
@@ -62,7 +62,7 @@ export default function ExamsPage() {
                   </option>
                 ))}
               </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-neutral-500">
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-neutral-500 dark:text-[#9CA3AF]">
                 <svg className="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                   <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
                 </svg>
@@ -85,7 +85,7 @@ export default function ExamsPage() {
         <ExamsList courseId={courseId} canManage={canManage} />
       ) : (
         <Card>
-          <p className="text-sm text-neutral-600 text-center py-8">
+          <p className="text-sm text-neutral-600 dark:text-[#9CA3AF] text-center py-8">
             Selecione um curso para ver as provas
           </p>
         </Card>

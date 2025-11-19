@@ -96,7 +96,7 @@ export default function MessageForm({ onMessageSent }) {
     <div ref={formRef} className="relative">
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="relative">
-          <label htmlFor="receiverEmail" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="receiverEmail" className="block text-sm font-medium text-gray-700 dark:text-[#E6EAF0]">
             Email do Destinatário
           </label>
           <input
@@ -108,32 +108,32 @@ export default function MessageForm({ onMessageSent }) {
             required
             autoComplete="off"
             placeholder="Digite o email do destinatário..."
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            className="mt-1 block w-full rounded-md border-gray-300 dark:border-[rgba(255,255,255,0.1)] bg-white dark:bg-[rgba(30,38,54,0.6)] text-gray-900 dark:text-[#E6EAF0] shadow-sm focus:border-blue-500 dark:focus:border-accent-blue focus:ring-blue-500 dark:focus:ring-accent-blue/20"
           />
           {showSuggestions && searchResults.length > 0 && (
-            <div className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto">
+            <div className="absolute z-10 mt-1 w-full bg-white dark:bg-[rgba(30,38,54,0.95)] border border-gray-300 dark:border-[rgba(255,255,255,0.1)] rounded-md shadow-lg max-h-60 overflow-auto">
               {searchResults.map((user) => (
                 <div
                   key={user._id}
                   onClick={() => selectUser(user)}
-                  className="px-4 py-2 hover:bg-blue-50 cursor-pointer border-b border-gray-100 last:border-b-0"
+                  className="px-4 py-2 hover:bg-blue-50 dark:hover:bg-[rgba(255,255,255,0.05)] cursor-pointer border-b border-gray-100 dark:border-[rgba(255,255,255,0.1)] last:border-b-0"
                 >
-                  <div className="font-medium text-gray-900">{user.name}</div>
-                  <div className="text-sm text-gray-500">{user.email}</div>
-                  <div className="text-xs text-gray-400 capitalize">{user.role}</div>
+                  <div className="font-medium text-gray-900 dark:text-[#E6EAF0]">{user.name}</div>
+                  <div className="text-sm text-gray-500 dark:text-[#9CA3AF]">{user.email}</div>
+                  <div className="text-xs text-gray-400 dark:text-[#6B7280] capitalize">{user.role}</div>
                 </div>
               ))}
             </div>
           )}
           {searchLoading && (
-            <div className="absolute right-3 top-8 text-sm text-gray-400">
+            <div className="absolute right-3 top-8 text-sm text-gray-400 dark:text-[#9CA3AF]">
               Buscando...
             </div>
           )}
         </div>
 
         <div>
-          <label htmlFor="subject" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-[#E6EAF0]">
             Assunto
           </label>
           <input
@@ -143,12 +143,12 @@ export default function MessageForm({ onMessageSent }) {
             value={formData.subject}
             onChange={handleChange}
             required
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            className="mt-1 block w-full rounded-md border-gray-300 dark:border-[rgba(255,255,255,0.1)] bg-white dark:bg-[rgba(30,38,54,0.6)] text-gray-900 dark:text-[#E6EAF0] shadow-sm focus:border-blue-500 dark:focus:border-accent-blue focus:ring-blue-500 dark:focus:ring-accent-blue/20"
           />
         </div>
 
         <div>
-          <label htmlFor="content" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="content" className="block text-sm font-medium text-gray-700 dark:text-[#E6EAF0]">
             Mensagem
           </label>
           <textarea
@@ -158,17 +158,17 @@ export default function MessageForm({ onMessageSent }) {
             value={formData.content}
             onChange={handleChange}
             required
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            className="mt-1 block w-full rounded-md border-gray-300 dark:border-[rgba(255,255,255,0.1)] bg-white dark:bg-[rgba(30,38,54,0.6)] text-gray-900 dark:text-[#E6EAF0] shadow-sm focus:border-blue-500 dark:focus:border-accent-blue focus:ring-blue-500 dark:focus:ring-accent-blue/20"
           />
         </div>
 
-        {error && <p className="text-red-500 text-sm">{error}</p>}
-        {success && <p className="text-green-500 text-sm">Mensagem enviada com sucesso!</p>}
+        {error && <p className="text-red-500 dark:text-red-400 text-sm">{error}</p>}
+        {success && <p className="text-green-500 dark:text-green-400 text-sm">Mensagem enviada com sucesso!</p>}
 
         <button
           type="submit"
           disabled={loading}
-          className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
+          className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 dark:bg-accent-blue py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 dark:hover:bg-[#4AB0E8] focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-accent-blue focus:ring-offset-2 disabled:opacity-50 transition-all duration-250"
         >
           {loading ? 'Enviando...' : 'Enviar Mensagem'}
         </button>

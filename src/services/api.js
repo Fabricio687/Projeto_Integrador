@@ -20,17 +20,17 @@ if (import.meta.env.VITE_API_URL) {
   // Usar variável de ambiente se definida (prioridade máxima)
   API_BASE_URL = import.meta.env.VITE_API_URL;
 } else if (isLocalhost) {
-  // Em desenvolvimento local, usar backend local
-  API_BASE_URL = 'http://localhost:3100/api';
+  // Em desenvolvimento local, usar proxy do Vite (relativo)
+  // O Vite proxy redireciona /api para http://localhost:3100/api
+  API_BASE_URL = '/api';
 } else {
   // Em produção no Vercel, usar URL do backend
   API_BASE_URL = PRODUCTION_API_URL;
 }
 
-// Log da URL sendo usada (apenas se não for localhost)
-if (!isLocalhost) {
-  console.log('🔗 API Base URL:', API_BASE_URL);
-}
+// Log da URL sendo usada
+console.log('🔗 API Base URL:', API_BASE_URL);
+console.log('📍 Ambiente:', isLocalhost ? 'Desenvolvimento Local' : 'Produção');
 
 export const api = axios.create({
   baseURL: API_BASE_URL,

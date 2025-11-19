@@ -47,7 +47,7 @@ export default function LoginForm() {
         onChange={onChange}
         required
       />
-      {error && <div className="text-sm text-red-600">{error}</div>}
+      {error && <div className="text-sm text-red-600 dark:text-red-400">{error}</div>}
       <Button disabled={loading} className="w-full">
         {loading ? 'Entrando...' : 'Entrar'}
       </Button>

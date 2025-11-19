@@ -13,8 +13,8 @@ export default function GradesPage() {
   return (
     <div className="space-y-6">
       <Card>
-        <h1 className="text-base font-semibold text-neutral-900">Notas</h1>
-        <p className="text-sm text-neutral-600">
+        <h1 className="text-base font-semibold text-neutral-900 dark:text-[#E6EAF0]">Notas</h1>
+        <p className="text-sm text-neutral-600 dark:text-[#9CA3AF]">
           {canManage 
             ? 'Gerencie as notas dos alunos. Clique em "Nova Nota" para lançar uma avaliação.'
             : 'Acompanhe seu histórico de notas e média ponderada.'
